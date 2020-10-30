@@ -1,0 +1,26 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "A to do web app",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awkircher/todo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/awkircher/todo/issues"
+  },
+  "homepage": "https://github.com/awkircher/todo#readme",
+  "devDependencies": {
+    "webpack": "^5.3.1",
+    "webpack-cli": "^4.1.0"
+  },
+  "dependencies": {
+    "date-fns": "^2.16.1"
+  }
+}
