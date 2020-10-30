@@ -23,6 +23,7 @@ div#container, #sideNav, #listContainer {
 #sideNav {
     box-sizing: content-box;
     width: 120px;
+    height: max-content;
     padding: 24px 48px;
     justify-content: left; 
     border: thin solid black;

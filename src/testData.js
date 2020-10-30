@@ -23,6 +23,30 @@ const test = [
         'Oct. 31, 2020',
         false,
     ],
+    [
+        'Fix the bathtub drain',
+        null,
+        'Home stuff',
+        'High priority',
+        'Tomorrow',
+        false,
+    ],
+    [
+        'Get fake pumpkins for the mantel',
+        'Something fabric, maybe Pottery Barn',
+        'Home stuff',
+        null,
+        'Someday',
+        false,
+    ],
+    [
+        'Pick up CSA',
+        null,
+        'Things to do',
+        'High priority',
+        'Nov. 3, 2020',
+        false,
+    ],
 ];
 
 function getTestData() {
