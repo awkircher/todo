@@ -32,12 +32,9 @@ class toDo {
     }
 }
 
-const allToDos = [];
-
 function create(form) {
     let toDoItem = new toDo(form[0], form[1], form[2], form[3], form[4], form[5]);
-    allToDos.push(toDoItem);
-    return allToDos;
+    return toDoItem;
 }
 
 export { create };

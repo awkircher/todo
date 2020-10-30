@@ -1,14 +1,14 @@
 import { create } from './classDef.js';
-import { show } from './itemTemplate.js';
+import { updateList, updateNav } from './itemTemplate.js';
+import { Data } from './database.js';
+import { getTestData } from './testData.js'
 
-const task = [
-    'Mark this task as done!',
-    null,
-    null,
-    null,
-    false,
-];
+const testData = getTestData();
 
-let allToDos = create(task);
-console.log(allToDos);
-show(allToDos);
+testData.forEach(element => {
+    const task = create(element);
+    Data.add(task);
+});
+
+updateList(Data.get()); //view onscreen
+updateNav(Data.get());
