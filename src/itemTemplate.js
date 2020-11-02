@@ -5,24 +5,32 @@ function updateList(data) {
     data.forEach((todo, index) => {
         let parent = document.createElement('div');
         parent.setAttribute("data-index", `index${index}`);
+        parent.setAttribute("class", "listItem");
         listContainer.appendChild(parent);
 
+        let titleCont = document.createElement('div');
+        titleCont.setAttribute("class", "titleContainer");
         let domTitle = document.createElement('h1');
         let domDescription = document.createElement('h2');
+        let metaCont = document.createElement('div');
+        metaCont.setAttribute("class", "metaContainer");
         let domPriority = document.createElement('p');
         let domDue = document.createElement('p');
         let domDone = document.createElement('input');
 
-        parent.appendChild(domTitle);
-        parent.appendChild(domDescription);
-        parent.appendChild(domPriority);
-        parent.appendChild(domDue);
+        parent.appendChild(titleCont);
+        parent.appendChild(metaCont);
+        
+        titleCont.appendChild(domTitle);
+        titleCont.appendChild(domDescription);
+        metaCont.appendChild(domDue);
+        metaCont.appendChild(domPriority);
         parent.appendChild(domDone);
         
         domTitle.textContent = todo.title;
         domDescription.textContent = todo.description;
-        domPriority.textContent = todo.priority;
         domDue.textContent = todo.due;
+        domPriority.textContent = todo.priority;
         domDone.setAttribute("type", "checkbox");
     });
 }

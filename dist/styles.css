@@ -3,6 +3,7 @@ body {
     padding: 0;
     background-color: #F1F2F9;
     color: rgba(0,0,0,0.8);
+    -webkit-font-smoothing: antialiased;
 }
 
 header {
@@ -12,6 +13,11 @@ header {
     height: 48px;
     padding: 8px 48px;
     background-color: #16171A;
+}
+
+/*container styles*/
+div#container {
+    padding: 0px 48px;
 }
 
 div#container, #sideNav, #listContainer {
@@ -26,7 +32,7 @@ div#container, #sideNav, #listContainer {
     box-sizing: content-box;
     width: 120px;
     height: max-content;
-    padding: 24px 0px 24px 48px;
+    padding: 24px 0px 24px 0px;
     justify-content: left;
     font-size: 16px;
     font-family: Proza Libre;
@@ -37,7 +43,8 @@ div#container, #sideNav, #listContainer {
     width: 540px;
 }
 
-#listContainer div {
+/*To do list item styles*/
+.listItem {
     width: 100%;
     border: 1px solid rgba(0,0,0,0.04);
     display: flex;
@@ -51,31 +58,40 @@ div#container, #sideNav, #listContainer {
     margin-bottom: 1px;
 }
 
-#listContainer h1, #listContainer h2 {
-    font-family: Proza Libre;
-    font-size: 14px;
-    line-height: 19px;
-    text-align: left;
-}
-
-#listContainer h1 {
-    font-weight: 600;
-    width: 90%;
-    margin: 2px 0 0 16px;
+.titleContainer {
     order: 2;
+    padding: 0px 0px 0px 16px;
+    flex-grow: 2;
 }
 
-#listContainer h2 {
-    font-weight: 400;
+.metaContainer {
+    display: flex;
     order: 3;
 }
 
-#listContainer p {
-    color: rgba(0,0,0,0.6);
-    order: 4;
+.titleContainer h1, .titleContainer h2 {
+    font-family: Proza Libre;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left;
+    margin: 0;
 }
 
-#listContainer input[type="checkbox"] {
+.titleContainer h1 {
+    font-weight: 600;
+}
+
+.titleContainer h2 {
+    font-weight: 400;
+}
+
+.metaContainer p {
+    color: rgba(0,0,0,0.6);
+    line-height: 24px;
+    margin: 0;
+}
+
+.listItem input[type="checkbox"] {
     appearance: unset;
     height: 16px;
     width: 16px;
@@ -83,4 +99,30 @@ div#container, #sideNav, #listContainer {
     background: #F1F2F9;
     border: 1px solid rgba(0,0,0,0.16);
     order: 1;
+}
+
+/*Button and input styles*/
+button {
+    font-family: Nunito;
+    font-weight: 600;
+    font-size: 16px;
+    color: rgba(255,255,255, 0.9);
+    background-color: #2C43E4;
+    padding: 4px 16px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 0px;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #132184;
+}
+
+input[type="text"], select, input[type="date"] {
+    border: 1px solid rgba(0,0,0,0.16);
+    height: 40px;
+    box-sizing: border-box;
+    padding: 8px;
+    font-family: Nunito;
 }
