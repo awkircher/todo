@@ -1,10 +1,11 @@
-import { ToDo } from './classDef.js';
-import { updateList, updateNav } from './itemTemplate.js';
+import { ToDo } from './ToDo.js';
+import { updateList, updateNav } from './view.js';
 import { Data } from './database.js';
 //import { getTestData } from './testData.js'
 
-updateList(Data.get()); //view onscreen
-updateNav(Data.get());
+// form submission will reload the page, calling these updates
+updateList(Data.getActive());
+updateNav(Data.getActive());
 
 const form = document.querySelector('#createNew');
 form.addEventListener('submit', function(event){
@@ -16,13 +17,11 @@ form.addEventListener('submit', function(event){
 const checkboxes = document.querySelectorAll('#listContainer div');
 Array.from(checkboxes).forEach(element => {
     element.addEventListener("change", function(event){
-        let id = event.currentTarget.dataset.index;
-        const property = 'done';
-        const value = true;
-        Data.update(id, property, value);
+        console.log('checkbox checked!');
+        const index = event.currentTarget.dataset.index;
+        const theData = Data.getActive();
+        const itemToUpdate = theData[index].edit('done', true);
+        Data.update(index, itemToUpdate);
+        updateList(Data.getActive()); //change event doesn't reload page, so calling updateList directly
     });
 });
-
-const theData = Data.get();
-//theData[0].edit('title', 'My updated title');
-console.log(theData[0]);

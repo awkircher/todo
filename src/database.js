@@ -1,5 +1,8 @@
+import { ToDo } from "./ToDo";
+
 const Data = (function() {
     let allToDos = [];
+    let activeToDos = [];
     const add = function(item) {
         allToDos.unshift(item);
         localStorage.setItem("allToDos", JSON.stringify(allToDos));
@@ -7,19 +10,26 @@ const Data = (function() {
     };
     const get = function() {
         let retrievedList = localStorage.getItem("allToDos");
-        console.log(retrievedList);
         allToDos = JSON.parse(retrievedList) || [];
+        allToDos.forEach((element, index) => {
+            let todo = new ToDo;
+            allToDos[index] = Object.assign(todo, element);
+        });
         return allToDos;
     }
-    const update = function(id, property, value) {
+    const getActive = function() {
         let allToDos = get();
-        let itemToUpdate = allToDos[id];
-        itemToUpdate[`${property}`] = value;
+        activeToDos = allToDos.filter(todo => todo.done !== true);
+        return activeToDos;
+    }
+    const update = function(index, itemToUpdate) {
+        let allToDos = getActive();
+        activeToDos[index] = Object.assign(activeToDos[index], itemToUpdate);
         localStorage.setItem("allToDos", JSON.stringify(allToDos));
         console.log(allToDos);
         return allToDos;
     }
-    return {add, get, update}; //Data.add, Data.get
+    return {add, get, update, getActive};
 })();
 
 export { Data };
