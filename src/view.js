@@ -1,18 +1,27 @@
+import { markDone, formSubmit } from './index.js';
+
 const listContainer = document.querySelector("#listContainer");
 const sideNav = document.querySelector("#sideNav");
+const form = document.querySelector('#createNew');
+
+form.addEventListener('submit', formSubmit);
+
+function clear(element) {
+    while (element.firstChild) {
+        element.removeChild(element.firstChild);
+    };
+}
 
 function updateList(data) {
     console.log('you called updateList');
-    while (listContainer.firstChild) {
-        listContainer.removeChild(listContainer.firstChild);
-    };
+    clear(listContainer);
     data.forEach((todo, index) => {
         let parent = document.createElement('div');
         parent.setAttribute("data-index", `${index}`);
         parent.setAttribute("class", "listItem");
+        parent.addEventListener("change", markDone);
         listContainer.appendChild(parent);
-        //add event listeners to the checkboxes 
-        //define the onchange function in index.js
+        
         let titleCont = document.createElement('div');
         titleCont.setAttribute("class", "titleContainer");
         let domTitle = document.createElement('h1');
@@ -41,6 +50,7 @@ function updateList(data) {
 }
 
 function updateNav(data) {
+    clear(sideNav);
     let allListProps = {};
     data.forEach(todo => {
         let listName = todo.list;

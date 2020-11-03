@@ -22,6 +22,9 @@ const Data = (function() {
         activeToDos = allToDos.filter(todo => todo.done !== true);
         return activeToDos;
     }
+    const getFromList = function(listName) {
+        //placeholder for when I have filtering by list
+    }
     const update = function(index, itemToUpdate) {
         let allToDos = getActive();
         activeToDos[index] = Object.assign(activeToDos[index], itemToUpdate);
