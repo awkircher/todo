@@ -7,6 +7,7 @@ const Data = (function() {
     };
     const get = function() {
         let retrievedList = localStorage.getItem("allToDos");
+        console.log(retrievedList);
         allToDos = JSON.parse(retrievedList) || [];
         return allToDos;
     }

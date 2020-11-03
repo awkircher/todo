@@ -1,6 +1,4 @@
-import { Data } from "./database";
-
-class toDo {
+class ToDo {
     constructor(title, description, list, priority, due, done) {
         this.title = title;
         this.description = description;
@@ -34,18 +32,4 @@ class toDo {
     }
 }
 
-function create(form) {
-    let toDoItem = new toDo(form[0].value, form[1].value, form[2].value, form[3].value, form[4].value);
-    return toDoItem;
-}
-
-function markDone(event) {
-    let id = event.currentTarget.dataset.index;
-    const last = (id.length) - 1;
-    id = id.charAt(last);
-    const property = 'due';
-    const value = true;
-    Data.update(id, property, value);
-}
-
-export { create, markDone };
+export { ToDo };

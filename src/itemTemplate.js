@@ -4,7 +4,7 @@ const sideNav = document.querySelector("#sideNav");
 function updateList(data) {
     data.forEach((todo, index) => {
         let parent = document.createElement('div');
-        parent.setAttribute("data-index", `index${index}`);
+        parent.setAttribute("data-index", `${index}`);
         parent.setAttribute("class", "listItem");
         listContainer.appendChild(parent);
 
