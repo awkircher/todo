@@ -8,21 +8,29 @@
         <body>
             <header id="header">
                 <img src="images/logo.svg">
-                <button id="mainNew">New to do</button>
+                <button id="mainNew" class="primary">New to do</button>
             </header>
-            <form id="createNew">
-                <label>New to do</label>
-                <input type="text" name="title"></input>
-                <input type="text" name="description"></input>
-                <input type="text" name="list"></input>
-                <select name="priority" id="priority">
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
-                </select>
-                <input type="date"></input>
-                <button type="submit">Save</button>
-            </form>
+            <div id="formContainer" class="hidden">
+                <form id="createNew">
+                    <h1>New To Do</h1>
+                    <label>Title</label>
+                    <input type="text" name="title"></input>
+                    <label>Description</label>
+                    <input type="text" name="description"></input>
+                    <label>List</label>
+                    <input type="text" name="list"></input>
+                    <label>Priority</label>
+                    <select name="priority" id="priority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                    <label>Due date</label>
+                    <input type="date"></input>
+                    <button id="cancel" class="secondary">Cancel</button>
+                    <button type="submit" class="primary">Save</button>
+                </form>
+            </div>
             <div id="container">
                 <nav id="sideNav"></nav>
                 <div id="listContainer"></div>

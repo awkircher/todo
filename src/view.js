@@ -1,10 +1,15 @@
-import { markDone, formSubmit } from './index.js';
+import { markDone, formSubmit, showModal } from './index.js';
 
 const listContainer = document.querySelector("#listContainer");
 const sideNav = document.querySelector("#sideNav");
+const formContainer = document.querySelector("#formContainer");
 const form = document.querySelector('#createNew');
+const createButton = document.querySelector("#mainNew");
 
 form.addEventListener('submit', formSubmit);
+createButton.addEventListener('click', function() {
+    showModal(formContainer);
+});
 
 function clear(element) {
     while (element.firstChild) {

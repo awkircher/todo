@@ -7,17 +7,26 @@ body {
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
+    position: fixed;
     box-sizing: border-box;
+    width: 100%;
     height: 48px;
     padding: 8px 48px;
+    display: flex;
+    justify-content: space-between;
     background-color: #16171A;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.24);
+}
+
+.hidden {
+    visibility: hidden;
+    width: 0px !important;
+    height: 0px !important;
 }
 
 /*container styles*/
 div#container {
-    padding: 0px 48px;
+    padding: 96px 48px 0px 48px;
 }
 
 div#container, #sideNav, #listContainer {
@@ -41,6 +50,15 @@ div#container, #sideNav, #listContainer {
 #listContainer {
     margin: 0 auto;
     width: 540px;
+}
+
+#formContainer {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.6);
 }
 
 /*To do list item styles*/
@@ -101,28 +119,57 @@ div#container, #sideNav, #listContainer {
     order: 1;
 }
 
-/*Button and input styles*/
+/*form, button, and input styles*/
+form {
+    display: flex;
+    flex-wrap: wrap;
+    width: min-content;
+    height: max-content;
+    background-color: #ffffff;
+    padding: 24px;
+    box-shadow: 0px 1px 8px 0px rgba(0,0,0,0.24);
+}
+
+form h1 {
+    width: 100%;
+}
+
 button {
     font-family: Nunito;
     font-weight: 600;
     font-size: 16px;
-    color: rgba(255,255,255, 0.9);
-    background-color: #2C43E4;
+    cursor: pointer;
     padding: 4px 16px;
     height: 40px;
     box-sizing: border-box;
+}
+
+button.primary {
+    color: rgba(255,255,255, 0.9);
+    background-color: #2C43E4;
     border: 0px;
 }
 
-button:hover {
-    cursor: pointer;
+button.primary:hover {
     background-color: #132184;
+}
+
+button.secondary {
+    color: #2C43E4;
+    border: 2px solid #2C43E4;
+}
+
+button.secondary:hover {
+    color: #132184;
+    border: 2px solid #132184;
 }
 
 input[type="text"], select, input[type="date"] {
     border: 1px solid rgba(0,0,0,0.16);
+    min-width: 470px;
     height: 40px;
     box-sizing: border-box;
     padding: 8px;
+    margin-bottom: 24px;
     font-family: Nunito;
 }
