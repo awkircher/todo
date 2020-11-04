@@ -14,7 +14,7 @@ function getValues() {
 }
 
 function editSubmit(event, index) {
-    event.preventDefault();
+    //event.preventDefault();
     let item = event.currentTarget;
     console.log('you tried to submit edits');
     console.log(`event is ${event}`);
@@ -24,10 +24,10 @@ function editSubmit(event, index) {
     const data = Data.getActive();
     let itemToUpdate = data[index];
     itemToUpdate.edit('title', item[0].value);
-    // itemToUpdate.edit('description', this[1].value);
-    // itemToUpdate.edit('list', this[2].value);
-    // itemToUpdate.edit('priority', this[3].value);
-    // itemToUpdate.edit('due', this[4].value);
+    itemToUpdate.edit('description', item[1].value);
+    itemToUpdate.edit('list', item[2].value);
+    itemToUpdate.edit('priority', item[3].value);
+    itemToUpdate.edit('due', item[4].value);
     Data.update(itemToUpdate);
 }
 
