@@ -1,20 +1,16 @@
-import { markDone, formSubmit, getValues } from './index.js';
+import { markDone, formSubmit, getValues, editSubmit } from './index.js';
 
 const listContainer = document.querySelector("#listContainer");
 const sideNav = document.querySelector("#sideNav");
 const formContainer = document.querySelector("#formContainer");
-const form = document.querySelector('#createNew');
 const createButton = document.querySelector("#mainNew");
-
-form.addEventListener('submit', formSubmit);
 
 function showHideModal(element) {
     element.classList.toggle('hidden');
 }
+
 createButton.addEventListener('click', function() {
-    showHideModal(formContainer);
-});
-formContainer.addEventListener('click', function(){
+    createToDo();
     showHideModal(formContainer);
 });
 
@@ -81,31 +77,119 @@ function updateNav(data) {
 }
 
 function editToDo(event) {
+    clear(formContainer);
     let todo = event.currentTarget;
     let index = todo.dataset.index;
     let data = getValues();
     let currentProps = data[index];
     console.log(currentProps);
-//do the codes to create all these HTML elements and fill them with the currentProps values
-    // <form id="createNew">
-    //                 <h1>New To Do</h1>
-    //                 <label>Title</label>
-    //                 <input type="text" name="title"></input>
-    //                 <label>Description</label>
-    //                 <input type="text" name="description"></input>
-    //                 <label>List</label>
-    //                 <input type="text" name="list"></input>
-    //                 <label>Priority</label>
-    //                 <select name="priority" id="priority">
-    //                     <option value="high">High</option>
-    //                     <option value="medium">Medium</option>
-    //                     <option value="low">Low</option>
-    //                 </select>
-    //                 <label>Due date</label>
-    //                 <input type="date"></input>
-    //                 <input type="button" value="Cancel" id="cancel" class="secondary"></input>
-    //                 <input type="submit" value="Save" class="primary"></input>
-    //             </form>
+
+    const form = document.createElement('form');
+    form.addEventListener("submit", function(event) {
+        console.log('you hit submit');
+        editSubmit(event, index);
+    });
+    const header = document.createElement('h1');
+    const titleLabel = document.createElement('label');
+    const titleInput = document.createElement('input')
+    const descLabel = document.createElement('label');
+    const descInput = document.createElement('input');
+    const listLabel = document.createElement('label');
+    const listInput = document.createElement('input')
+    const priorityLabel = document.createElement('label');
+    const prioritySelect = document.createElement('select');
+    const optHigh = document.createElement('option');
+    const optMed = document.createElement('option');
+    const optLow = document.createElement('option');
+    const dueDateLabel = document.createElement('label');
+    const dueDateInput = document.createElement('input')
+    const cancelButton = document.createElement('input')
+    const submitButton = document.createElement('input')
+
+    form.setAttribute("id", "edit");
+    header.textContent="Edit To Do";
+    titleInput.setAttribute("type", "text");
+    titleInput.setAttribute("value", currentProps.title);
+    descInput.setAttribute("type", "text");
+    descInput.setAttribute("value", currentProps.description);
+    listInput.setAttribute("type", "text");
+    listInput.setAttribute("value", currentProps.list);
+    dueDateInput.setAttribute("type", "date");
+    dueDateInput.setAttribute("value", currentProps.due);
+    cancelButton.setAttribute("type", "button");
+    cancelButton.setAttribute("value", "Cancel");
+    submitButton.setAttribute("type", "submit");
+    submitButton.setAttribute("value", "Save");
+
+    formContainer.appendChild(form);
+    form.appendChild(header);
+    form.appendChild(titleLabel);
+    form.appendChild(titleInput);
+    form.appendChild(descLabel);
+    form.appendChild(descInput);
+    form.appendChild(listLabel);
+    form.appendChild(listInput);
+    form.appendChild(priorityLabel);
+    form.appendChild(prioritySelect)
+    prioritySelect.appendChild(optHigh);
+    prioritySelect.appendChild(optMed);
+    prioritySelect.appendChild(optLow);
+    form.appendChild(dueDateLabel);
+    form.appendChild(dueDateInput);
+    form.appendChild(cancelButton);
+    form.appendChild(submitButton);
+}
+
+function createToDo() {
+    clear(formContainer);
+    const form = document.createElement('form');
+    const header = document.createElement('h1');
+    const titleLabel = document.createElement('label');
+    const titleInput = document.createElement('input')
+    const descLabel = document.createElement('label');
+    const descInput = document.createElement('input');
+    const listLabel = document.createElement('label');
+    const listInput = document.createElement('input')
+    const priorityLabel = document.createElement('label');
+    const prioritySelect = document.createElement('select');
+    const optHigh = document.createElement('option');
+    const optMed = document.createElement('option');
+    const optLow = document.createElement('option');
+    const dueDateLabel = document.createElement('label');
+    const dueDateInput = document.createElement('input')
+    const cancelButton = document.createElement('input')
+    const submitButton = document.createElement('input')
+
+    form.setAttribute("id", "create");
+    header.textContent="New To Do";
+    titleInput.setAttribute("type", "text");
+    descInput.setAttribute("type", "text");
+    listInput.setAttribute("type", "text");
+    dueDateInput.setAttribute("type", "date");
+    cancelButton.setAttribute("type", "button");
+    cancelButton.setAttribute("value", "Cancel");
+    submitButton.setAttribute("type", "submit");
+    submitButton.setAttribute("value", "Save");
+
+    formContainer.appendChild(form);
+    form.appendChild(header);
+    form.appendChild(titleLabel);
+    form.appendChild(titleInput);
+    form.appendChild(descLabel);
+    form.appendChild(descInput);
+    form.appendChild(listLabel);
+    form.appendChild(listInput);
+    form.appendChild(priorityLabel);
+    form.appendChild(prioritySelect)
+    prioritySelect.appendChild(optHigh);
+    prioritySelect.appendChild(optMed);
+    prioritySelect.appendChild(optLow);
+    form.appendChild(dueDateLabel);
+    form.appendChild(dueDateInput);
+    form.appendChild(cancelButton);
+    form.appendChild(submitButton);
+
+    form.addEventListener("submit", formSubmit);
 }
 
 export { updateList, updateNav };

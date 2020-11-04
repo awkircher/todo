@@ -13,6 +13,24 @@ function getValues() {
     return Data.getActive();
 }
 
+function editSubmit(event, index) {
+    event.preventDefault();
+    let item = event.currentTarget;
+    console.log('you tried to submit edits');
+    console.log(`event is ${event}`);
+    console.log(`item is ${item}`);
+    console.log(`this is ${this}`);
+    console.log(`index is ${index}`);
+    const data = Data.getActive();
+    let itemToUpdate = data[index];
+    itemToUpdate.edit('title', item[0].value);
+    // itemToUpdate.edit('description', this[1].value);
+    // itemToUpdate.edit('list', this[2].value);
+    // itemToUpdate.edit('priority', this[3].value);
+    // itemToUpdate.edit('due', this[4].value);
+    Data.update(itemToUpdate);
+}
+
 function formSubmit(event) {
     const id = generateId();
     const todo = new ToDo(id, this[0].value, this[1].value, this[2].value, this[3].value, this[4].value, false);
@@ -22,8 +40,8 @@ function formSubmit(event) {
 function markDone(event) {
     console.log('checkbox checked!');
     const index = event.currentTarget.dataset.index;
-    const theData = Data.getActive();
-    const itemToUpdate = theData[index].edit('done', true);
+    const data = Data.getActive();
+    const itemToUpdate = data[index].edit('done', true);
     Data.update(itemToUpdate);
     updateList(Data.getActive());
     updateNav(Data.getActive());
@@ -33,4 +51,4 @@ function markDone(event) {
 updateList(Data.getActive());
 updateNav(Data.getActive());
 
-export { markDone, formSubmit, getValues };
+export { markDone, formSubmit, getValues, editSubmit };

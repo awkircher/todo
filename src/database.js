@@ -32,7 +32,7 @@ const Data = (function() {
         //replace the old allToDos item with updatedToDo
         allToDos[index] = updatedToDo;
         localStorage.setItem("allToDos", JSON.stringify(allToDos));
-        console.log(allToDos);
+        console.log(`these are updated ${allToDos}`);
         return allToDos;
     }
     return {add, get, update, getActive};
