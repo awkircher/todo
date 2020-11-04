@@ -1,4 +1,4 @@
-import { markDone, formSubmit, showModal } from './index.js';
+import { markDone, formSubmit, showHideModal } from './index.js';
 
 const listContainer = document.querySelector("#listContainer");
 const sideNav = document.querySelector("#sideNav");
@@ -8,7 +8,10 @@ const createButton = document.querySelector("#mainNew");
 
 form.addEventListener('submit', formSubmit);
 createButton.addEventListener('click', function() {
-    showModal(formContainer);
+    showHideModal(formContainer);
+});
+formContainer.addEventListener('click', function(){
+    showHideModal(formContainer);
 });
 
 function clear(element) {

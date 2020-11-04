@@ -3,7 +3,7 @@ import { updateList, updateNav } from './view.js';
 import { Data } from './database.js';
 //import { getTestData } from './testData.js'
 
-function showModal(element) {
+function showHideModal(element) {
     element.classList.toggle('hidden');
 }
 
@@ -33,4 +33,4 @@ function markDone(event) {
 updateList(Data.getActive());
 updateNav(Data.getActive());
 
-export { markDone, formSubmit, showModal };
+export { markDone, formSubmit, showHideModal };

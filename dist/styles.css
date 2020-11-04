@@ -134,7 +134,7 @@ form h1 {
     width: 100%;
 }
 
-button {
+button, input[type="submit"], input[type="button"] {
     font-family: Nunito;
     font-weight: 600;
     font-size: 16px;
@@ -144,22 +144,22 @@ button {
     box-sizing: border-box;
 }
 
-button.primary {
+.primary {
     color: rgba(255,255,255, 0.9);
     background-color: #2C43E4;
     border: 0px;
 }
 
-button.primary:hover {
+.primary:hover {
     background-color: #132184;
 }
 
-button.secondary {
+.secondary {
     color: #2C43E4;
     border: 2px solid #2C43E4;
 }
 
-button.secondary:hover {
+.secondary:hover {
     color: #132184;
     border: 2px solid #132184;
 }
