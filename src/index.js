@@ -2,14 +2,15 @@ import { ToDo } from './ToDo.js';
 import { updateList, updateNav } from './view.js';
 import { Data } from './database.js';
 //import { getTestData } from './testData.js'
-let i = 0;
-function countTurn() {
-    ++i;
-    return i;
+
+function generateId() {
+    const data = Data.get();
+    let id = data.length;
+    return id++;
 }
 
 function formSubmit(event) {
-    const id = countTurn();
+    const id = generateId();
     const todo = new ToDo(id, this[0].value, this[1].value, this[2].value, this[3].value, this[4].value, false);
     Data.add(todo);
 };
