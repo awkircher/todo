@@ -1,4 +1,4 @@
-import { markDone, formSubmit, showHideModal } from './index.js';
+import { markDone, formSubmit, getValues } from './index.js';
 
 const listContainer = document.querySelector("#listContainer");
 const sideNav = document.querySelector("#sideNav");
@@ -7,6 +7,10 @@ const form = document.querySelector('#createNew');
 const createButton = document.querySelector("#mainNew");
 
 form.addEventListener('submit', formSubmit);
+
+function showHideModal(element) {
+    element.classList.toggle('hidden');
+}
 createButton.addEventListener('click', function() {
     showHideModal(formContainer);
 });
@@ -28,6 +32,7 @@ function updateList(data) {
         parent.setAttribute("data-index", `${index}`);
         parent.setAttribute("class", "listItem");
         parent.addEventListener("change", markDone);
+        parent.addEventListener("click", editToDo);
         listContainer.appendChild(parent);
         
         let titleCont = document.createElement('div');
@@ -73,6 +78,34 @@ function updateNav(data) {
         item.setAttribute("id", `${property}`);
         item.textContent = `${property}`;
     }
+}
+
+function editToDo(event) {
+    let todo = event.currentTarget;
+    let index = todo.dataset.index;
+    let data = getValues();
+    let currentProps = data[index];
+    console.log(currentProps);
+//do the codes to create all these HTML elements and fill them with the currentProps values
+    // <form id="createNew">
+    //                 <h1>New To Do</h1>
+    //                 <label>Title</label>
+    //                 <input type="text" name="title"></input>
+    //                 <label>Description</label>
+    //                 <input type="text" name="description"></input>
+    //                 <label>List</label>
+    //                 <input type="text" name="list"></input>
+    //                 <label>Priority</label>
+    //                 <select name="priority" id="priority">
+    //                     <option value="high">High</option>
+    //                     <option value="medium">Medium</option>
+    //                     <option value="low">Low</option>
+    //                 </select>
+    //                 <label>Due date</label>
+    //                 <input type="date"></input>
+    //                 <input type="button" value="Cancel" id="cancel" class="secondary"></input>
+    //                 <input type="submit" value="Save" class="primary"></input>
+    //             </form>
 }
 
 export { updateList, updateNav };

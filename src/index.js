@@ -3,14 +3,14 @@ import { updateList, updateNav } from './view.js';
 import { Data } from './database.js';
 //import { getTestData } from './testData.js'
 
-function showHideModal(element) {
-    element.classList.toggle('hidden');
-}
-
 function generateId() {
     const data = Data.get();
     let id = data.length;
     return id++;
+}
+
+function getValues() {
+    return Data.getActive();
 }
 
 function formSubmit(event) {
@@ -33,4 +33,4 @@ function markDone(event) {
 updateList(Data.getActive());
 updateNav(Data.getActive());
 
-export { markDone, formSubmit, showHideModal };
+export { markDone, formSubmit, getValues };

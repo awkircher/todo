@@ -53,8 +53,9 @@ div#container, #sideNav, #listContainer {
 }
 
 #formContainer {
-    position: relative;
-    height: 100vh;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
