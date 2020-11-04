@@ -2,7 +2,6 @@ import { ToDo } from "./ToDo";
 
 const Data = (function() {
     let allToDos = [];
-    let activeToDos = [];
     const add = function(item) {
         allToDos.unshift(item);
         localStorage.setItem("allToDos", JSON.stringify(allToDos));
@@ -19,15 +18,19 @@ const Data = (function() {
     }
     const getActive = function() {
         let allToDos = get();
-        activeToDos = allToDos.filter(todo => todo.done !== true);
+        let activeToDos = allToDos.filter(todo => todo.done !== true);
         return activeToDos;
     }
     const getFromList = function(listName) {
         //placeholder for when I have filtering by list
     }
-    const update = function(index, itemToUpdate) {
-        let allToDos = getActive();
-        activeToDos[index] = Object.assign(activeToDos[index], itemToUpdate);
+    const update = function(itemToUpdate) {
+        let allToDos = get();
+        let index = allToDos.findIndex(todo => todo.id === itemToUpdate.id);
+        let match = allToDos.filter(todo => todo.id === itemToUpdate.id);
+        let updatedToDo = Object.assign(match[0], itemToUpdate);
+        //replace the old allToDos item with updatedToDo
+        allToDos[index] = updatedToDo;
         localStorage.setItem("allToDos", JSON.stringify(allToDos));
         console.log(allToDos);
         return allToDos;

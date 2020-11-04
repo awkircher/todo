@@ -20,7 +20,7 @@ function markDone(event) {
     const index = event.currentTarget.dataset.index;
     const theData = Data.getActive();
     const itemToUpdate = theData[index].edit('done', true);
-    Data.update(index, itemToUpdate);
+    Data.update(itemToUpdate);
     updateList(Data.getActive());
     updateNav(Data.getActive());
 };
