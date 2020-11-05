@@ -11,7 +11,6 @@ function showHideModal(element) {
 
 createButton.addEventListener('click', function() {
     createToDo();
-    showHideModal(formContainer);
 });
 
 function clear(element) {
@@ -37,7 +36,7 @@ function updateList(data) {
         let domDescription = document.createElement('h2');
         let metaCont = document.createElement('div');
         metaCont.setAttribute("class", "metaContainer");
-        let domPriority = document.createElement('p');
+        let domPriority = document.createElement('img');
         let domDue = document.createElement('p');
         let domDone = document.createElement('input');
 
@@ -53,7 +52,19 @@ function updateList(data) {
         domTitle.textContent = todo.title;
         domDescription.textContent = todo.description;
         domDue.textContent = todo.due;
-        domPriority.textContent = todo.priority;
+        function priorityIcon(level) {
+            let file;
+            if (level === "High") {
+                file = "images/high.svg";
+            } else if (level === "Medium") {
+                file = "images/med.svg";
+            } else {
+                file = "images/low.svg";
+            }
+            return file;
+        }
+        const path = priorityIcon(todo.priority);
+        domPriority.setAttribute("src", path);
         domDone.setAttribute("type", "checkbox");
     });
 }
@@ -91,7 +102,7 @@ function editToDo(event) {
     });
     const header = document.createElement('h1');
     const titleLabel = document.createElement('label');
-    const titleInput = document.createElement('input')
+    const titleInput = document.createElement('input');
     const descLabel = document.createElement('label');
     const descInput = document.createElement('input');
     const listLabel = document.createElement('label');
@@ -102,20 +113,31 @@ function editToDo(event) {
     const optMed = document.createElement('option');
     const optLow = document.createElement('option');
     const dueDateLabel = document.createElement('label');
-    const dueDateInput = document.createElement('input')
-    const cancelButton = document.createElement('input')
-    const submitButton = document.createElement('input')
+    const dueDateInput = document.createElement('input');
+    const cancelButton = document.createElement('input');
+    cancelButton.addEventListener('click', function() {
+        showHideModal(formContainer);
+    });
+    const submitButton = document.createElement('input');
 
     form.setAttribute("id", "edit");
     header.textContent="Edit To Do";
     titleInput.setAttribute("type", "text");
     titleInput.setAttribute("value", currentProps.title);
+    titleLabel.textContent = "Title";
     descInput.setAttribute("type", "text");
     descInput.setAttribute("value", currentProps.description);
+    descLabel.textContent = "Description";
     listInput.setAttribute("type", "text");
     listInput.setAttribute("value", currentProps.list);
+    listLabel.textContent = "List";
+    optHigh.textContent = "High";
+    optMed.textContent = "Medium";
+    optLow.textContent = "Low";
+    priorityLabel.textContent = "Priority";
     dueDateInput.setAttribute("type", "date");
     dueDateInput.setAttribute("value", currentProps.due);
+    dueDateLabel.textContent = "Due date";
     cancelButton.setAttribute("type", "button");
     cancelButton.setAttribute("value", "Cancel");
     submitButton.setAttribute("type", "submit");
@@ -138,11 +160,14 @@ function editToDo(event) {
     form.appendChild(dueDateInput);
     form.appendChild(cancelButton);
     form.appendChild(submitButton);
+
+    showHideModal(formContainer);
 }
 
 function createToDo() {
     clear(formContainer);
     const form = document.createElement('form');
+    form.addEventListener("submit", formSubmit);
     const header = document.createElement('h1');
     const titleLabel = document.createElement('label');
     const titleInput = document.createElement('input')
@@ -158,14 +183,25 @@ function createToDo() {
     const dueDateLabel = document.createElement('label');
     const dueDateInput = document.createElement('input')
     const cancelButton = document.createElement('input')
+    cancelButton.addEventListener("click", function() { 
+        showHideModal(formContainer);
+    });
     const submitButton = document.createElement('input')
 
     form.setAttribute("id", "create");
     header.textContent="New To Do";
     titleInput.setAttribute("type", "text");
+    titleLabel.textContent = "Title";
     descInput.setAttribute("type", "text");
+    descLabel.textContent = "Description";
     listInput.setAttribute("type", "text");
+    listLabel.textContent = "List";
+    optHigh.textContent = "High";
+    optMed.textContent = "Medium";
+    optLow.textContent = "Low";
+    priorityLabel.textContent = "Priority";
     dueDateInput.setAttribute("type", "date");
+    dueDateLabel.textContent = "Due date";
     cancelButton.setAttribute("type", "button");
     cancelButton.setAttribute("value", "Cancel");
     submitButton.setAttribute("type", "submit");
@@ -189,7 +225,7 @@ function createToDo() {
     form.appendChild(cancelButton);
     form.appendChild(submitButton);
 
-    form.addEventListener("submit", formSubmit);
+    showHideModal(formContainer);
 }
 
 export { updateList, updateNav };

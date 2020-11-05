@@ -44,7 +44,7 @@ div#container, #sideNav, #listContainer {
     padding: 24px 0px 24px 0px;
     justify-content: left;
     font-size: 16px;
-    font-family: Proza Libre;
+    font-family: Inconsolata;
 }
 
 #listContainer {
@@ -72,7 +72,7 @@ div#container, #sideNav, #listContainer {
     background-color: #ffffff;
     box-sizing: border-box;
     padding: 16px;
-    font-family: Nunito;
+    font-family: Inconsolata;
     font-size: 14px;
     margin-bottom: 1px;
 }
@@ -136,7 +136,7 @@ form h1 {
 }
 
 button, input[type="submit"], input[type="button"] {
-    font-family: Nunito;
+    font-family: Inconsolata;
     font-weight: 600;
     font-size: 16px;
     cursor: pointer;
@@ -147,7 +147,7 @@ button, input[type="submit"], input[type="button"] {
 
 .primary {
     color: rgba(255,255,255, 0.9);
-    background-color: #2C43E4;
+    background-color: #525df6;
     border: 0px;
 }
 
@@ -156,8 +156,8 @@ button, input[type="submit"], input[type="button"] {
 }
 
 .secondary {
-    color: #2C43E4;
-    border: 2px solid #2C43E4;
+    color: #525df6;
+    border: 2px solid #525df6;
 }
 
 .secondary:hover {
@@ -172,5 +172,5 @@ input[type="text"], select, input[type="date"] {
     box-sizing: border-box;
     padding: 8px;
     margin-bottom: 24px;
-    font-family: Nunito;
+    font-family: Inconsolata;
 }
