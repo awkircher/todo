@@ -1,5 +1,5 @@
 import { ToDo } from './ToDo.js';
-import { updateList, updateNav } from './view.js';
+import { updateList, updateNav, editToDo, showHideModal } from './view.js';
 import { Data } from './database.js';
 //import { getTestData } from './testData.js'
 
@@ -37,15 +37,40 @@ function formSubmit(event) {
     Data.add(todo);
 };
 
-function markDone(event) {
+function markDone(element) {
     console.log('checkbox checked!');
-    const index = event.currentTarget.dataset.index;
+    const index = element.dataset.index;
     const data = Data.getActive();
+    console.log(`${element}`);
     const itemToUpdate = data[index].edit('done', true);
     Data.update(itemToUpdate);
     updateList(Data.getActive());
     updateNav(Data.getActive());
 };
+
+document.addEventListener("click", function(event) {
+    let element = event.target;
+    let closest = element.closest(".listItem");
+    let action = element.dataset.action;
+    if (action === undefined) {
+        if (closest) {
+            element = closest;
+            action = element.dataset.action;
+            console.log(`${element}, ${action}`);
+        } else if (element.id === "formContainer") {
+            showHideModal(element);
+        }
+    }
+    if (action === 'edit') {
+        editToDo(element);
+    } else if (action === 'markDone') {
+        markDone(closest);
+    } else {
+        console.log('no action defined, yet');
+    }
+    
+    console.log(`element data-action is ${action}`);
+});
 
 // form submission will reload the page, calling these updates
 updateList(Data.getActive());

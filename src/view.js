@@ -1,4 +1,4 @@
-import { markDone, formSubmit, getValues, editSubmit } from './index.js';
+import { formSubmit, getValues, editSubmit } from './index.js';
 
 const listContainer = document.querySelector("#listContainer");
 const sideNav = document.querySelector("#sideNav");
@@ -25,9 +25,8 @@ function updateList(data) {
     data.forEach((todo, index) => {
         let parent = document.createElement('div');
         parent.setAttribute("data-index", `${index}`);
+        parent.setAttribute("data-action", "edit");
         parent.setAttribute("class", "listItem");
-        parent.addEventListener("change", markDone);
-        parent.addEventListener("click", editToDo);
         listContainer.appendChild(parent);
         
         let titleCont = document.createElement('div');
@@ -63,9 +62,10 @@ function updateList(data) {
             }
             return file;
         }
-        const path = priorityIcon(todo.priority);
+        let path = priorityIcon(todo.priority);
         domPriority.setAttribute("src", path);
         domDone.setAttribute("type", "checkbox");
+        domDone.setAttribute("data-action", "markDone");
     });
 }
 
@@ -87,9 +87,9 @@ function updateNav(data) {
     }
 }
 
-function editToDo(event) {
+function editToDo(element) {
     clear(formContainer);
-    let todo = event.currentTarget;
+    let todo = element;
     let index = todo.dataset.index;
     let data = getValues();
     let currentProps = data[index];
@@ -142,6 +142,21 @@ function editToDo(event) {
     cancelButton.setAttribute("value", "Cancel");
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("value", "Save");
+
+    function selectPriority(level) {
+        let selected;
+        if (level === "High") {
+            selected = optHigh;
+        } else if (level === "Medium") {
+            selected = optMed;
+        } else {
+            selected = optLow;
+        }
+        return selected;
+    }
+
+    const optionElement = selectPriority(currentProps.priority);
+    optionElement.setAttribute("selected", true);
 
     formContainer.appendChild(form);
     form.appendChild(header);
@@ -228,4 +243,4 @@ function createToDo() {
     showHideModal(formContainer);
 }
 
-export { updateList, updateNav };
+export { updateList, updateNav, editToDo, showHideModal };
