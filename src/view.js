@@ -140,8 +140,10 @@ function editToDo(element) {
     dueDateLabel.textContent = "Due date";
     cancelButton.setAttribute("type", "button");
     cancelButton.setAttribute("value", "Cancel");
+    cancelButton.setAttribute("class", "secondary");
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("value", "Save");
+    submitButton.setAttribute("class", "primary");
 
     function selectPriority(level) {
         let selected;
@@ -206,10 +208,12 @@ function createToDo() {
     form.setAttribute("id", "create");
     header.textContent="New To Do";
     titleInput.setAttribute("type", "text");
+    titleInput.setAttribute("required", true);
     titleLabel.textContent = "Title";
     descInput.setAttribute("type", "text");
     descLabel.textContent = "Description";
     listInput.setAttribute("type", "text");
+    listInput.setAttribute("value", "Things to Do");
     listLabel.textContent = "List";
     optHigh.textContent = "High";
     optMed.textContent = "Medium";
@@ -219,8 +223,10 @@ function createToDo() {
     dueDateLabel.textContent = "Due date";
     cancelButton.setAttribute("type", "button");
     cancelButton.setAttribute("value", "Cancel");
+    cancelButton.setAttribute("class", "secondary");
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("value", "Save");
+    submitButton.setAttribute("class", "primary");
 
     formContainer.appendChild(form);
     form.appendChild(header);
