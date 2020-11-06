@@ -1,5 +1,5 @@
 import { ToDo } from './ToDo.js';
-import { updateList, updateNav, editToDo, showHideModal, updateAutocomplete, fillSelection } from './view.js';
+import { updateList, updateNav, editToDo, showHide, show, hide, updateAutocomplete, fillSelection } from './view.js';
 import { Data } from './database.js';
 //import { getTestData } from './testData.js'
 
@@ -68,7 +68,7 @@ function markDone(element) {
     updateNav(Data.getActive());
 };
 
-function matchListName(listName) {
+function getMatches(listName) {
     let current = listName;
     const fullList = getLists();
     const keys = Object.keys(fullList);
@@ -86,7 +86,7 @@ document.addEventListener("click", function(event) {
             action = element.dataset.action;
             console.log(`${element}, ${action}`);
         } else if (element.id === "formContainer") {
-            showHideModal(element);
+            showHide(element);
         }
     }
     if (action === 'edit') {
@@ -94,10 +94,11 @@ document.addEventListener("click", function(event) {
     } else if (action === 'markDone') {
         markDone(closest);
     } else if (action === 'auto') {
-        let matches = matchListName(element.value);
+        let matches = getMatches(element.value);
         updateAutocomplete(matches);
     } else if (action === 'selectMatch') {
         fillSelection(element.textContent);
+        hide(element.closest("#autoContainer"));
     } else {
         console.log('no action defined, yet');
     }
@@ -109,10 +110,31 @@ document.addEventListener("input", function(event) {
     let element = event.target;
     let action = element.dataset.action;
     if (action === "auto") {
-        let matches = matchListName(element.value);
+        let matches = getMatches(element.value);
         updateAutocomplete(matches);
     }
 });
+
+document.addEventListener("focusin", function(event) {
+    console.log('focusin!');
+    let element = event.target;
+    let action = element.dataset.action;
+    if (action === "auto") {
+        let matches = getMatches(element.value);
+        updateAutocomplete(matches);
+        show(element.nextSibling);
+    }
+});
+
+// document.addEventListener("focusout", function(event) {
+//     console.log('focusout!');
+//     let element = event.target;
+//     let action = element.dataset.action;
+//     if (action === "auto") {
+//         console.log(`element is ${element}`);
+//         hide(element.nextSibling);
+//     }
+// });
 
 // form submission will reload the page, calling these updates
 updateList(Data.getActive());

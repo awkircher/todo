@@ -195,7 +195,7 @@ button, input[type="submit"], input[type="button"] {
     border: 2px solid #132184;
 }
 
-input[type="text"], select, input[type="date"] {
+input[type="text"], select, input[type="date"], #autoContainer {
     border: 1px solid rgba(0,0,0,0.16);
     min-width: 470px;
     height: 40px;
@@ -203,4 +203,17 @@ input[type="text"], select, input[type="date"] {
     padding: 8px;
     margin-bottom: 24px;
     font-family: Inconsolata;
+}
+
+input[data-action="auto"] {
+    position: relative;
+    margin-bottom: 0px;
+}
+
+#autoContainer {
+    height: max-content;
+}
+
+.auto {
+    line-height: 24px;
 }

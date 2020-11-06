@@ -1,12 +1,24 @@
-import { formSubmit, getActiveValues, getActiveLists, editSubmit, getLists } from './index.js';
+import { formSubmit, getActiveValues, getActiveLists, editSubmit } from './index.js';
 
 const listContainer = document.querySelector("#listContainer");
 const sideNav = document.querySelector("#sideNav");
 const formContainer = document.querySelector("#formContainer");
 const createButton = document.querySelector("#mainNew");
 
-function showHideModal(element) {
+function showHide(element) {
     element.classList.toggle('hidden');
+}
+
+function show(element) {
+    if (element.classList.contains('hidden')) {
+        element.classList.remove('hidden');
+    }
+}
+
+function hide(element) {
+    if (!element.classList.contains('hidden')) {
+        element.classList.add('hidden');
+    }
 }
 
 createButton.addEventListener('click', function() {
@@ -80,7 +92,7 @@ function updateNav() {
     }
 }
 
-function updateAutocomplete(list) { //called after a modal is created
+function updateAutocomplete(list) {
     const container = document.querySelector("#autoContainer");
     clear(container);
     list.forEach(item => {
@@ -125,7 +137,7 @@ function editToDo(element) {
     const dueDateInput = document.createElement('input');
     const cancelButton = document.createElement('input');
     cancelButton.addEventListener('click', function() {
-        showHideModal(formContainer);
+        showHide(formContainer);
     });
     const submitButton = document.createElement('input');
 
@@ -142,6 +154,7 @@ function editToDo(element) {
     listInput.setAttribute("data-action", "auto");
     listLabel.textContent = "List";
     autocompleteDisplay.setAttribute("id", "autoContainer");
+    autocompleteDisplay.setAttribute("class", "hidden");
     optHigh.textContent = "High";
     optMed.textContent = "Medium";
     optLow.textContent = "Low";
@@ -190,11 +203,14 @@ function editToDo(element) {
     form.appendChild(cancelButton);
     form.appendChild(submitButton);
 
-    showHideModal(formContainer);
+    showHide(formContainer);
 }
 
 function createToDo() {
     clear(formContainer);
+    let data = getActiveValues();
+    let value = data[0].list;
+
     const form = document.createElement('form');
     form.addEventListener("submit", formSubmit);
     const header = document.createElement('h1');
@@ -214,7 +230,7 @@ function createToDo() {
     const dueDateInput = document.createElement('input')
     const cancelButton = document.createElement('input')
     cancelButton.addEventListener("click", function() { 
-        showHideModal(formContainer);
+        showHide(formContainer);
     });
     const submitButton = document.createElement('input')
 
@@ -226,10 +242,11 @@ function createToDo() {
     descInput.setAttribute("type", "text");
     descLabel.textContent = "Description";
     listInput.setAttribute("type", "text");
-    listInput.setAttribute("value", "Things to Do");
+    listInput.setAttribute("value", value);
     listInput.setAttribute("data-action", "auto");
     listLabel.textContent = "List";
     autocompleteDisplay.setAttribute("id", "autoContainer");
+    autocompleteDisplay.setAttribute("class", "hidden");
     optHigh.textContent = "High";
     optMed.textContent = "Medium";
     optLow.textContent = "Low";
@@ -262,7 +279,7 @@ function createToDo() {
     form.appendChild(cancelButton);
     form.appendChild(submitButton);
 
-    showHideModal(formContainer);
+    showHide(formContainer);
 }
 
-export { updateList, updateNav, editToDo, showHideModal, updateAutocomplete, fillSelection };
+export { updateList, updateNav, editToDo, showHide, show, hide, updateAutocomplete, fillSelection };
