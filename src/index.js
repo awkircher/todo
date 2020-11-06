@@ -1,5 +1,5 @@
 import { ToDo } from './ToDo.js';
-import { updateList, updateNav, editToDo, showHideModal, updateAutocomplete } from './view.js';
+import { updateList, updateNav, editToDo, showHideModal, updateAutocomplete, fillSelection } from './view.js';
 import { Data } from './database.js';
 //import { getTestData } from './testData.js'
 
@@ -72,7 +72,7 @@ function matchListName(listName) {
     let current = listName;
     const fullList = getLists();
     const keys = Object.keys(fullList);
-    let matches = keys.filter(key => (key === current) || (key.startsWith(current)));
+    let matches = keys.filter(key => (key.toUpperCase() === current.toUpperCase()) || (key.toUpperCase().startsWith(current.toUpperCase())));
     return matches;
 }
 
@@ -96,6 +96,8 @@ document.addEventListener("click", function(event) {
     } else if (action === 'auto') {
         let matches = matchListName(element.value);
         updateAutocomplete(matches);
+    } else if (action === 'selectMatch') {
+        fillSelection(element.textContent);
     } else {
         console.log('no action defined, yet');
     }

@@ -81,14 +81,20 @@ function updateNav() {
 }
 
 function updateAutocomplete(list) { //called after a modal is created
-    const form = formContainer.firstElementChild;
-    console.log(list);
+    const container = document.querySelector("#autoContainer");
+    clear(container);
     list.forEach(item => {
         const a = document.createElement('div');
-        form.appendChild(a);
+        container.appendChild(a);
         a.setAttribute("class", "auto");
+        a.setAttribute("data-action", "selectMatch");
         a.textContent = `${item}`;
     });
+}
+
+function fillSelection(value) {
+    const input = document.querySelector("input[data-action='auto']");
+    input.value = value;
 }
 
 function editToDo(element) {
@@ -97,11 +103,9 @@ function editToDo(element) {
     let index = todo.dataset.index;
     let data = getActiveValues();
     let currentProps = data[index];
-    console.log(currentProps);
 
     const form = document.createElement('form');
     form.addEventListener("submit", function(event) {
-        console.log('you hit submit');
         editSubmit(event, index);
     });
     const header = document.createElement('h1');
@@ -111,6 +115,7 @@ function editToDo(element) {
     const descInput = document.createElement('input');
     const listLabel = document.createElement('label');
     const listInput = document.createElement('input')
+    const autocompleteDisplay = document.createElement('div');
     const priorityLabel = document.createElement('label');
     const prioritySelect = document.createElement('select');
     const optHigh = document.createElement('option');
@@ -136,6 +141,7 @@ function editToDo(element) {
     listInput.setAttribute("value", currentProps.list);
     listInput.setAttribute("data-action", "auto");
     listLabel.textContent = "List";
+    autocompleteDisplay.setAttribute("id", "autoContainer");
     optHigh.textContent = "High";
     optMed.textContent = "Medium";
     optLow.textContent = "Low";
@@ -173,6 +179,7 @@ function editToDo(element) {
     form.appendChild(descInput);
     form.appendChild(listLabel);
     form.appendChild(listInput);
+    form.appendChild(autocompleteDisplay);
     form.appendChild(priorityLabel);
     form.appendChild(prioritySelect)
     prioritySelect.appendChild(optHigh);
@@ -196,7 +203,8 @@ function createToDo() {
     const descLabel = document.createElement('label');
     const descInput = document.createElement('input');
     const listLabel = document.createElement('label');
-    const listInput = document.createElement('input')
+    const listInput = document.createElement('input');
+    const autocompleteDisplay = document.createElement('div');
     const priorityLabel = document.createElement('label');
     const prioritySelect = document.createElement('select');
     const optHigh = document.createElement('option');
@@ -221,6 +229,7 @@ function createToDo() {
     listInput.setAttribute("value", "Things to Do");
     listInput.setAttribute("data-action", "auto");
     listLabel.textContent = "List";
+    autocompleteDisplay.setAttribute("id", "autoContainer");
     optHigh.textContent = "High";
     optMed.textContent = "Medium";
     optLow.textContent = "Low";
@@ -242,6 +251,7 @@ function createToDo() {
     form.appendChild(descInput);
     form.appendChild(listLabel);
     form.appendChild(listInput);
+    form.appendChild(autocompleteDisplay);
     form.appendChild(priorityLabel);
     form.appendChild(prioritySelect)
     prioritySelect.appendChild(optHigh);
@@ -255,4 +265,4 @@ function createToDo() {
     showHideModal(formContainer);
 }
 
-export { updateList, updateNav, editToDo, showHideModal, updateAutocomplete };
+export { updateList, updateNav, editToDo, showHideModal, updateAutocomplete, fillSelection };

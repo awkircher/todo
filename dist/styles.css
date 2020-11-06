@@ -135,7 +135,8 @@ div#container, #sideNav, #listContainer {
 /* side nav menu item styles */
 #sideNav div {
     width: 100%;
-    line-height: 24px;
+    line-height: 16px;
+    margin-bottom: 16px;
 }
 
 /*form, button, and input styles*/
