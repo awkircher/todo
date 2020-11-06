@@ -1,4 +1,4 @@
-import { formSubmit, getValues, editSubmit } from './index.js';
+import { formSubmit, getActiveValues, getActiveLists, editSubmit, getLists } from './index.js';
 
 const listContainer = document.querySelector("#listContainer");
 const sideNav = document.querySelector("#sideNav");
@@ -69,17 +69,10 @@ function updateList(data) {
     });
 }
 
-function updateNav(data) {
+function updateNav() {
     clear(sideNav);
-    let allListProps = {};
-    data.forEach(todo => {
-        let listName = todo.list;
-        if (!allListProps.hasOwnProperty(`${listName}`)) {
-            allListProps[`${listName}`] = true;
-        }
-        return allListProps;
-    });
-    for (const property in allListProps) {
+    let activeListProps = getActiveLists();
+    for (const property in activeListProps) {
         const item = document.createElement('div');
         sideNav.appendChild(item);
         item.setAttribute("id", `${property}`);
@@ -87,11 +80,22 @@ function updateNav(data) {
     }
 }
 
+function updateAutocomplete(list) { //called after a modal is created
+    const form = formContainer.firstElementChild;
+    console.log(list);
+    list.forEach(item => {
+        const a = document.createElement('div');
+        form.appendChild(a);
+        a.setAttribute("class", "auto");
+        a.textContent = `${item}`;
+    });
+}
+
 function editToDo(element) {
     clear(formContainer);
     let todo = element;
     let index = todo.dataset.index;
-    let data = getValues();
+    let data = getActiveValues();
     let currentProps = data[index];
     console.log(currentProps);
 
@@ -130,6 +134,7 @@ function editToDo(element) {
     descLabel.textContent = "Description";
     listInput.setAttribute("type", "text");
     listInput.setAttribute("value", currentProps.list);
+    listInput.setAttribute("data-action", "auto");
     listLabel.textContent = "List";
     optHigh.textContent = "High";
     optMed.textContent = "Medium";
@@ -214,6 +219,7 @@ function createToDo() {
     descLabel.textContent = "Description";
     listInput.setAttribute("type", "text");
     listInput.setAttribute("value", "Things to Do");
+    listInput.setAttribute("data-action", "auto");
     listLabel.textContent = "List";
     optHigh.textContent = "High";
     optMed.textContent = "Medium";
@@ -249,4 +255,4 @@ function createToDo() {
     showHideModal(formContainer);
 }
 
-export { updateList, updateNav, editToDo, showHideModal };
+export { updateList, updateNav, editToDo, showHideModal, updateAutocomplete };

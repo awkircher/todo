@@ -1,5 +1,5 @@
 import { ToDo } from './ToDo.js';
-import { updateList, updateNav, editToDo, showHideModal } from './view.js';
+import { updateList, updateNav, editToDo, showHideModal, updateAutocomplete } from './view.js';
 import { Data } from './database.js';
 //import { getTestData } from './testData.js'
 
@@ -9,18 +9,38 @@ function generateId() {
     return id++;
 }
 
-function getValues() {
+function getActiveValues() {
     return Data.getActive();
 }
 
+function getLists() { //returns a de-duplicated list of list names
+    let data = Data.get();
+    let allListProps = {};
+    data.forEach(todo => {
+        let listName = todo.list;
+        if (!allListProps.hasOwnProperty(`${listName}`)) {
+            allListProps[`${listName}`] = true;
+        }
+        return allListProps;
+    });
+    return allListProps;
+}
+
+function getActiveLists() { //returns a de-duplicated list of active list names
+    let data = Data.getActive();
+    let activeListProps = {};
+    data.forEach(todo => {
+        let listName = todo.list;
+        if (!activeListProps.hasOwnProperty(`${listName}`)) {
+            activeListProps[`${listName}`] = true;
+        }
+        return activeListProps;
+    });
+    return activeListProps;
+}
+
 function editSubmit(event, index) {
-    //event.preventDefault();
     let item = event.currentTarget;
-    console.log('you tried to submit edits');
-    console.log(`event is ${event}`);
-    console.log(`item is ${item}`);
-    console.log(`this is ${this}`);
-    console.log(`index is ${index}`);
     const data = Data.getActive();
     let itemToUpdate = data[index];
     itemToUpdate.edit('title', item[0].value);
@@ -48,6 +68,14 @@ function markDone(element) {
     updateNav(Data.getActive());
 };
 
+function matchListName(listName) {
+    let current = listName;
+    const fullList = getLists();
+    const keys = Object.keys(fullList);
+    let matches = keys.filter(key => (key === current) || (key.startsWith(current)));
+    return matches;
+}
+
 document.addEventListener("click", function(event) {
     let element = event.target;
     let closest = element.closest(".listItem");
@@ -65,6 +93,9 @@ document.addEventListener("click", function(event) {
         editToDo(element);
     } else if (action === 'markDone') {
         markDone(closest);
+    } else if (action === 'auto') {
+        let matches = matchListName(element.value);
+        updateAutocomplete(matches);
     } else {
         console.log('no action defined, yet');
     }
@@ -72,8 +103,17 @@ document.addEventListener("click", function(event) {
     console.log(`element data-action is ${action}`);
 });
 
+document.addEventListener("input", function(event) {
+    let element = event.target;
+    let action = element.dataset.action;
+    if (action === "auto") {
+        let matches = matchListName(element.value);
+        updateAutocomplete(matches);
+    }
+});
+
 // form submission will reload the page, calling these updates
 updateList(Data.getActive());
 updateNav(Data.getActive());
 
-export { markDone, formSubmit, getValues, editSubmit };
+export { markDone, formSubmit, getActiveValues, getActiveLists, editSubmit, getLists };

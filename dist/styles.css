@@ -39,7 +39,8 @@ div#container, #sideNav, #listContainer {
 
 #sideNav {
     box-sizing: content-box;
-    width: 120px;
+    min-width: 120px;
+    max-width: fit-content;
     height: max-content;
     padding: 0px 0px 24px 0px;
     justify-content: left;
@@ -49,7 +50,8 @@ div#container, #sideNav, #listContainer {
 
 #listContainer {
     margin: 0 auto;
-    width: 540px;
+    min-width: 540px;
+    padding: 0px 48px;
 }
 
 #formContainer {
@@ -122,7 +124,8 @@ div#container, #sideNav, #listContainer {
 .listItem input[type="checkbox"] {
     appearance: unset;
     height: 16px;
-    width: 17px;
+    min-width: 16px;
+    max-width: 16px;
     border-radius: 100px;
     background: #F1F2F9;
     border: 1px solid rgba(0,0,0,0.16);
