@@ -48,6 +48,29 @@ div#container, #sideNav, #listContainer {
     font-family: Inconsolata;
 }
 
+#noDataOuter {
+    position: absolute;
+    display: flex;
+    align-content: center;
+    justify-items: center;
+    flex-wrap: wrap;
+    z-index: -100;
+    width: 100vw;
+    margin: 100px auto auto auto;
+    justify-content: center;
+}
+
+#noDataInner {
+    text-align: center;
+}
+
+#noDataInner h1 {
+    font-family: Proza Libre;
+    font-size: 21px;
+    color: rgba(0,0,0,0.8);
+    margin-bottom: 32px;
+}
+
 #listContainer {
     margin: 0 auto;
     min-width: 540px;
@@ -68,6 +91,7 @@ div#container, #sideNav, #listContainer {
 /*To do list item styles*/
 .listItem {
     width: 100%;
+    height: min-content;
     border: 1px solid rgba(0,0,0,0.04);
     display: flex;
     box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.16);
@@ -76,7 +100,6 @@ div#container, #sideNav, #listContainer {
     padding: 16px;
     font-family: Inconsolata;
     font-size: 14px;
-    margin-bottom: 1px;
 }
 
 .titleContainer {
@@ -139,6 +162,10 @@ div#container, #sideNav, #listContainer {
     margin-bottom: 16px;
 }
 
+.selected {
+    font-weight: 600;
+}
+
 /*form, button, and input styles*/
 form {
     display: flex;
@@ -184,7 +211,7 @@ button, input[type="submit"], input[type="button"] {
 }
 
 .secondary {
-    background: #ffffff;
+    background: transparent;
     color: #525df6;
     border: 2px solid #525df6;
     margin-right: 16px;

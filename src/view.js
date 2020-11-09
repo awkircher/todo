@@ -84,9 +84,17 @@ function updateList(data) {
 function updateNav() {
     clear(sideNav);
     let activeListProps = getActiveLists();
+    const keys = Object.keys(activeListProps);
+    if (keys.length > 0) {
+        const everything = document.createElement('div');
+        sideNav.appendChild(everything);
+        everything.setAttribute("data-action", "everything");
+        everything.textContent = "Everything";
+    }
     for (const property in activeListProps) {
         const item = document.createElement('div');
         sideNav.appendChild(item);
+        item.setAttribute("data-action", "list");
         item.setAttribute("id", `${property}`);
         item.textContent = `${property}`;
     }
@@ -289,4 +297,4 @@ function createToDo() {
     showHide(formContainer);
 }
 
-export { updateList, updateNav, editToDo, showHide, show, hide, updateAutocomplete, fillSelection };
+export { updateList, updateNav, editToDo, createToDo, showHide, show, hide, updateAutocomplete, fillSelection };

@@ -1,5 +1,5 @@
 import { ToDo } from './ToDo.js';
-import { updateList, updateNav, editToDo, showHide, show, hide, updateAutocomplete, fillSelection } from './view.js';
+import { updateList, updateNav, editToDo, createToDo, showHide, show, hide, updateAutocomplete, fillSelection } from './view.js';
 import { Data } from './database.js';
 //import { getTestData } from './testData.js'
 
@@ -66,6 +66,7 @@ function markDone(element) {
     Data.update(itemToUpdate);
     updateList(Data.getActive());
     updateNav(Data.getActive());
+    checkNoData();
 };
 
 function getMatches(listName) {
@@ -74,6 +75,15 @@ function getMatches(listName) {
     const keys = Object.keys(fullList);
     let matches = keys.filter(key => (key.toUpperCase() === current.toUpperCase()) || (key.toUpperCase().startsWith(current.toUpperCase())));
     return matches;
+}
+
+function checkNoData() {
+    const data = Data.getActive();
+    if (data.length > 0) {
+        hide(document.querySelector('#noDataOuter'));
+    } else {
+        show(document.querySelector('#noDataOuter'));
+    }
 }
 
 document.addEventListener("click", function(event) {
@@ -96,6 +106,15 @@ document.addEventListener("click", function(event) {
     } else if (action === 'auto') {
         let matches = getMatches(element.value);
         updateAutocomplete(matches);
+    } else if (action === 'noDataStart') {
+        createToDo();
+    } else if (action === 'list') {
+        let filteredToDos = Data.getFromList(element.id);
+        updateList(filteredToDos);
+        updateNav(); //Nav shows all active lists, not just what you've filtered
+    } else if (action === 'everything') {
+        updateList(Data.getActive());
+        updateNav(Data.getActive());
     } else {
         console.log('no action defined, yet');
     }
@@ -145,5 +164,6 @@ document.addEventListener("focusout", function(event) {
 // form submission will reload the page, calling these updates
 updateList(Data.getActive());
 updateNav(Data.getActive());
+checkNoData();
 
 export { markDone, formSubmit, getActiveValues, getActiveLists, editSubmit, getLists };

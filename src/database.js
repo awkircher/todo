@@ -22,7 +22,9 @@ const Data = (function() {
         return activeToDos;
     }
     const getFromList = function(listName) {
-        //placeholder for when I have filtering by list
+        let activeToDos = getActive();
+        let todosInList = activeToDos.filter(todo => todo.list === listName);
+        return todosInList;
     }
     const update = function(itemToUpdate) {
         let allToDos = get();
@@ -35,7 +37,7 @@ const Data = (function() {
         console.log(`these are updated ${allToDos}`);
         return allToDos;
     }
-    return {add, get, update, getActive};
+    return {add, get, update, getActive, getFromList};
 })();
 
 export { Data };
