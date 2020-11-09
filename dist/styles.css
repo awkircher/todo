@@ -180,7 +180,7 @@ button, input[type="submit"], input[type="button"] {
 }
 
 .primary:hover {
-    background-color: #132184;
+    background-color: #363DA6;
 }
 
 .secondary {
@@ -191,8 +191,8 @@ button, input[type="submit"], input[type="button"] {
 }
 
 .secondary:hover {
-    color: #132184;
-    border: 2px solid #132184;
+    color: #363DA6;
+    border: 2px solid #363DA6;
 }
 
 input[type="text"], select, input[type="date"], #autoContainer {

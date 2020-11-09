@@ -96,14 +96,20 @@ document.addEventListener("click", function(event) {
     } else if (action === 'auto') {
         let matches = getMatches(element.value);
         updateAutocomplete(matches);
-    } else if (action === 'selectMatch') {
-        fillSelection(element.textContent);
-        hide(element.closest("#autoContainer"));
     } else {
         console.log('no action defined, yet');
     }
     
     console.log(`element data-action is ${action}`);
+});
+
+document.addEventListener("mousedown", function(event) {
+    let element = event.target;
+    let action = element.dataset.action;
+    if (action === 'selectMatch') {
+        fillSelection(element.textContent);
+        hide(element.closest("#autoContainer"));
+    }
 });
 
 document.addEventListener("input", function(event) {
@@ -126,15 +132,15 @@ document.addEventListener("focusin", function(event) {
     }
 });
 
-// document.addEventListener("focusout", function(event) {
-//     console.log('focusout!');
-//     let element = event.target;
-//     let action = element.dataset.action;
-//     if (action === "auto") {
-//         console.log(`element is ${element}`);
-//         hide(element.nextSibling);
-//     }
-// });
+document.addEventListener("focusout", function(event) {
+    console.log('focusout!');
+    let element = event.target;
+    let action = element.dataset.action;
+    if (action === "auto") {
+        console.log(`element is ${element}`);
+        hide(element.nextSibling);
+    }
+});
 
 // form submission will reload the page, calling these updates
 updateList(Data.getActive());

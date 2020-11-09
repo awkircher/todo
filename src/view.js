@@ -154,6 +154,7 @@ function editToDo(element) {
     listInput.setAttribute("data-action", "auto");
     listLabel.textContent = "List";
     autocompleteDisplay.setAttribute("id", "autoContainer");
+    autocompleteDisplay.setAttribute("data-action", "autoList");
     autocompleteDisplay.setAttribute("class", "hidden");
     optHigh.textContent = "High";
     optMed.textContent = "Medium";
@@ -209,7 +210,12 @@ function editToDo(element) {
 function createToDo() {
     clear(formContainer);
     let data = getActiveValues();
-    let value = data[0].list;
+    let value;
+    if (data[0] === undefined) {
+        value = "My List";
+    } else {
+        value = data[0].list;
+    }
 
     const form = document.createElement('form');
     form.addEventListener("submit", formSubmit);
@@ -246,6 +252,7 @@ function createToDo() {
     listInput.setAttribute("data-action", "auto");
     listLabel.textContent = "List";
     autocompleteDisplay.setAttribute("id", "autoContainer");
+    autocompleteDisplay.setAttribute("data-action", "autoList");
     autocompleteDisplay.setAttribute("class", "hidden");
     optHigh.textContent = "High";
     optMed.textContent = "Medium";
