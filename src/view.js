@@ -21,6 +21,12 @@ function hide(element) {
     }
 }
 
+function removeSpaces(phrase) {
+    const original = Array.from(phrase);
+    const noSpaces = original.filter(char => char !== " ");
+    return noSpaces.join('');
+}
+
 createButton.addEventListener('click', function() {
     createToDo();
 });
@@ -89,13 +95,16 @@ function updateNav() {
         const everything = document.createElement('div');
         sideNav.appendChild(everything);
         everything.setAttribute("data-action", "everything");
+        everything.setAttribute("id", "everything");
         everything.textContent = "Everything";
     }
     for (const property in activeListProps) {
         const item = document.createElement('div');
         sideNav.appendChild(item);
         item.setAttribute("data-action", "list");
-        item.setAttribute("id", `${property}`);
+        let noSpaceProp = removeSpaces(property);
+        item.setAttribute("data-name", `${property}`);
+        item.setAttribute("id", `${noSpaceProp}`);
         item.textContent = `${property}`;
     }
 }

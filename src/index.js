@@ -65,7 +65,7 @@ function markDone(element) {
     const itemToUpdate = data[index].edit('done', true);
     Data.update(itemToUpdate);
     updateList(Data.getActive());
-    updateNav(Data.getActive());
+    updateNav();
     checkNoData();
 };
 
@@ -86,6 +86,10 @@ function checkNoData() {
     }
 }
 
+function everythingSelected() {
+    document.querySelector("#everything").classList.add("selected");
+}
+
 document.addEventListener("click", function(event) {
     let element = event.target;
     let closest = element.closest(".listItem");
@@ -103,18 +107,21 @@ document.addEventListener("click", function(event) {
         editToDo(element);
     } else if (action === 'markDone') {
         markDone(closest);
+        everythingSelected();
     } else if (action === 'auto') {
         let matches = getMatches(element.value);
         updateAutocomplete(matches);
     } else if (action === 'noDataStart') {
         createToDo();
     } else if (action === 'list') {
-        let filteredToDos = Data.getFromList(element.id);
+        let filteredToDos = Data.getFromList(element.dataset.name);
         updateList(filteredToDos);
         updateNav(); //Nav shows all active lists, not just what you've filtered
+        document.querySelector(`#${element.id}`).classList.add('selected');
     } else if (action === 'everything') {
         updateList(Data.getActive());
-        updateNav(Data.getActive());
+        updateNav();
+        everythingSelected();
     } else {
         console.log('no action defined, yet');
     }
@@ -136,7 +143,12 @@ document.addEventListener("input", function(event) {
     let action = element.dataset.action;
     if (action === "auto") {
         let matches = getMatches(element.value);
-        updateAutocomplete(matches);
+        if (matches.length < 1) {
+            hide(element.nextSibling); 
+        } else {
+            updateAutocomplete(matches);
+            show(element.nextSibling);
+        }
     }
 });
 
@@ -146,8 +158,12 @@ document.addEventListener("focusin", function(event) {
     let action = element.dataset.action;
     if (action === "auto") {
         let matches = getMatches(element.value);
-        updateAutocomplete(matches);
-        show(element.nextSibling);
+        if (matches.length < 1) {
+            hide(element.nextSibling); 
+        } else {
+            updateAutocomplete(matches);
+            show(element.nextSibling);
+        }
     }
 });
 
@@ -163,7 +179,8 @@ document.addEventListener("focusout", function(event) {
 
 // form submission will reload the page, calling these updates
 updateList(Data.getActive());
-updateNav(Data.getActive());
+updateNav();
 checkNoData();
+everythingSelected();
 
 export { markDone, formSubmit, getActiveValues, getActiveLists, editSubmit, getLists };
