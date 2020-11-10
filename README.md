@@ -9,8 +9,8 @@ The initial work for this app was completed with a focus on practicing SOLID des
 * 'Delightful' completion animations
 2. Dates
 * Readable date formatting
-* No 'past' dates
-* Fallback for browsers with type=date support
+* Not allowing due dates that are in the past
+* Fallback for browsers without type=date support
 3. Features
 * Countdown until 'due' with 'past due' styling
 * Reduce content on main list view and introduce a 'details' view
