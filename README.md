@@ -1,8 +1,8 @@
 # todo
-##A to do web app
+## A to do web app
 This web app allows you to add, edit, and mark done items on your list. It relies on local storage.
 
-##Future improvements
+## Future improvements
 The initial work for this app was completed with a focus on practicing SOLID design principles. A secondary focus was on DOM manipulation and CSS. There are many areas for big and small improvements:
 1. UI Polish
 * Transition animations 
