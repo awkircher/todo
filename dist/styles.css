@@ -92,7 +92,8 @@ div#container, #sideNav, #listContainer {
 
 /*To do list item styles*/
 .listItem {
-    width: 100%;
+    margin: 0px auto;
+    width: 540px;
     height: min-content;
     border: 1px solid rgba(0,0,0,0.04);
     display: flex;
@@ -165,7 +166,10 @@ div#container, #sideNav, #listContainer {
 }
 
 .listItem input[type="checkbox"]:hover {
-    box-shadow: inset 0px 0px 0px 3px #525df6;
+    border: solid 3px #f1f2f9;
+    background: #525df6;
+    box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.32);
+    box-sizing: border-box;
 }
 
 /* side nav menu item styles */
@@ -249,6 +253,10 @@ form input[type="submit"], form input[type="button"] {
 .secondary:hover {
     color: #363DA6;
     border: 2px solid #363DA6;
+}
+
+button.secondary[data-action="noDataStart"] {
+    margin-right: 0px;
 }
 
 input[type="text"], select, input[type="date"], #autoContainer {
