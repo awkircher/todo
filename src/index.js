@@ -64,7 +64,10 @@ function markDone(element) {
     console.log(`${element}`);
     const itemToUpdate = data[index].edit('done', true);
     Data.update(itemToUpdate);
-    updateList(Data.getActive());
+    element.classList.add('animate');
+    element.onanimationend = function() {
+        updateList(Data.getActive());
+    }
     updateNav();
     checkNoData();
 };
