@@ -1,0 +1,30 @@
+<!doctype html>
+    <html>
+        <head>
+            <title>To Do</title>
+            <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&family=Proza+Libre:wght@400;600&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="styles.css">
+        </head>
+        <body>
+            <header id="header">
+                <img src="images/logo.svg">
+                <button id="mainNew" class="primary">New to do</button>
+            </header>
+            <div id="formContainer" class="hidden"></div>
+            <div id="container">
+                <div id="noDataOuter">
+                    <div id="noDataInner">
+                        <img src="images/sun.svg">
+                        <h1>Nothing to do, yet.</h1>
+                        <button class="secondary" data-action="noDataStart">New to do</button>
+                    </div>
+                </div>
+                <nav id="sideNav"></nav>
+                <div id="main">
+                    <div id="listContainer">
+                </div>
+                </div>
+            </div>
+            <script src="main.js"></script>
+        </body>
+    </html>
